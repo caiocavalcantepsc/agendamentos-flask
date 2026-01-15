@@ -1,0 +1,43 @@
+
+{% extends 'index.html' %}
+
+{% block title %}
+<title>Contato detalhado</title>
+{% endblock %}
+
+{% include 'contato_lista.html' %}
+
+
+{% block body %}
+
+    <div class="container ">
+
+            <form action="{{ url_for('contatoLista') }}" method="get" class="row mt-2 d-flex justify-content-center align-items-center ">
+                <div class="col-2 d-flex gap-3 ">
+                    <button type="submit" class="btn btn-secondary col-6">
+                        Retornar
+                    </button>
+                </div>
+            </form>
+
+        <div class="row mt-6">
+            Nome:
+            <input type="text" value="{{objeto.nome}}" class="form-control bg-secondary text-white" readonly>
+        </div>
+
+        <div class="row mt-6">
+            E-mail:
+            <input type="text" value="{{objeto.email}}" class="form-control bg-secondary text-white" readonly>
+        </div>
+
+        <div class="row mt-6">
+            Assunto:
+            <input type="text" value="{{objeto.assunto}}" class="form-control bg-secondary text-white" readonly>
+        </div>
+
+        <div class="row mt-6">
+            Mensagem: 
+            <textarea type="text" rows="5 " class="form-control bg-secondary text-white" readonly>{{objeto.mensagem}}</textarea>
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'index.html' %}
+
+{% block title %}
+<title>Lista de contatos</title>
+{% endblock %}
+
+<form action="{{ url_for('contatoLista') }}" method="get" class="row mt-2">
+    <div class="col-2 d-flex gap-3">
+        <button type="submit" class="btn btn-secondary col-6">
+            Retornar
+        </button>
+    </div>
+</form>
+
+{% block body %}
+
+<div class="container">
+    <div class="row mt-6">
+        <h1 class="mt-5 ta-center">Lista de Contatos</h1>
+    </div>
+
+
+    <form method="get" class="row">
+
+        <div class="form-contron col-8">
+            <input type="text" name="pesquisa" class="form-control">
+        </div>
+
+        <div class="col-2 d-flex gap-3">
+            <button type="submit" class="btn btn-primary col-6">
+                Pesquisar
+            </button>
+
+            <a href="{{ url_for('homepage') }}" class="btn btn-danger col-6">
+                Retornar
+            </a>
+        </div>
+
+    </form>
+
+
+
+    <table class="table">
+        <thead>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Assunto</th>
+            <th>Mensagem</th>
+            <th>Id</th>
+            <th></th>
+        </thead>
+        <tbody>
+
+            {% for linha in context['dados'] %}
+
+            <tr>
+                <td>{{linha.nome}}</td>
+                <td>{{linha.email}}</td>
+                <td>{{linha.assunto}}</td>
+                <td>{{linha.mensagem}}</td>
+                <td>
+                    <form action="{{url_for('contatoDetalhe', id=linha.id)}}" method="get">
+                        <button type="submit" class="btn btn-primary col-2">{{linha.id}}</button>
+                    </form>
+
+                </td>
+
+                <td>
+                    <form action="{{ url_for('contatoDeletar', id=linha.id) }}" method="post"
+                        onsubmit="return confirm('Deseja apagar este contato?')">
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Apagar
+                        </button>
+                    </form>
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

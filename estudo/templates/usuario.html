@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -13,13 +13,11 @@
 </head>
 
     {% block body %}
-<body class="d-flex justify-content-center align-items-center vh-100 bg-dark color-light">
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
 
-    <div class="container shadow-lg p-4 rounded bg-white" style="max-width: 600px; height: 400px;">
+    <div class="container shadow-lg p-4 rounded bg-white" style="max-width: 600px; height: 300px;">
 
         <div class="d-flex flex-column justify-content-center align-items-center h-100">
-
-            {% if current_user.is_authenticated %}
 
             <h1 class="text-center mb-4">
                 Olá <strong>{{current_user.nome}}</strong>, seja bem vindo!
@@ -37,35 +35,12 @@
                 </button>
             </form>
 
-            <div class="d-flex gap-2">
-                <span class="btn btn-dark d-inline bt-3">{{current_user.nome}} {{current_user.sobrenome}}</span><br>
+            <div class="d-flex gap-1">
+                <span class="btn btn-dark d-inline bt-3">{{current_user.nome}} {{current_user.sobrenome}}</span>
                 <form action="{{url_for('logout')}}">
                     <button class="btn btn-danger">Sair</button>
                 </form>
             </div>
-            
-            {% else%}
-
-            <h1 class="text-center mb-4" id="some">
-                Olá, seja bem vindo!
-            </h1>
-
-            <form action="" method="POST" class="row">
-                {{ form.csrf_token }}
-                
-                {{ form.email.label() }}
-                {{ form.email(class="form-control mb-3") }}
-
-                {{ form.senha.label() }}
-                {{ form.senha(class="form-control") }}
-            
-
-                {{ form.btnSubmit(class="btn btn-primary mt-3") }}
-
-                <div>Ainda não tem cadastro? <a href="{{url_for('cadastro')}}">Clique aqui para se cadastrar</a></div>
-            </form> 
-
-            {% endif %}
 
         </div>
 
